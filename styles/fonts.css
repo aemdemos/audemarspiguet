@@ -2,12 +2,11 @@
 
 /* Audemars Piguet Custom Fonts - Helvetica Neue Web */
 
-/* Self-hosted fonts from Audemars Piguet website */
+/* Self-hosted fonts */
 
 @font-face {
   font-family: "Helvetica Neue Web";
-  src: url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-25-Ultra-Light.woff2") format("woff2"),
-       url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-25-Ultra-Light.woff") format("woff");
+  src: url("../fonts/Neue-Helvetica-25-Ultra-Light.woff2") format("woff2");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -15,35 +14,7 @@
 
 @font-face {
   font-family: "Helvetica Neue Web";
-  src: url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-26-Ultra-Light-Italic.woff2") format("woff2"),
-       url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-26-Ultra-Light-Italic.woff") format("woff");
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Helvetica Neue Web";
-  src: url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-35-Thin.woff2") format("woff2"),
-       url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-35-Thin.woff") format("woff");
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Helvetica Neue Web";
-  src: url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-36-Thin-Italic.woff2") format("woff2"),
-       url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-36-Thin-Italic.woff") format("woff");
-  font-weight: 200;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Helvetica Neue Web";
-  src: url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-45-Light.woff2") format("woff2"),
-       url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-45-Light.woff") format("woff");
+  src: url("../fonts/Neue-Helvetica-45-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -51,8 +22,7 @@
 
 @font-face {
   font-family: "Helvetica Neue Web";
-  src: url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-46-Light-Italic.woff2") format("woff2"),
-       url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-46-Light-Italic.woff") format("woff");
+  src: url("../fonts/Neue-Helvetica-46-Light-Italic.woff2") format("woff2");
   font-weight: 300;
   font-style: italic;
   font-display: swap;
@@ -60,8 +30,7 @@
 
 @font-face {
   font-family: "Helvetica Neue Web";
-  src: url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-55-Regular.woff2") format("woff2"),
-       url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-55-Regular.woff") format("woff");
+  src: url("../fonts/Neue-Helvetica-55-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -69,45 +38,26 @@
 
 @font-face {
   font-family: "Helvetica Neue Web";
-  src: url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-56-Regular-Italic.woff2") format("woff2"),
-       url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-56-Regular-Italic.woff") format("woff");
+  src: url("../fonts/Neue-Helvetica-65-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue Web";
+  src: url("../fonts/Neue-Helvetica-75-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Icon font */
+
+@font-face {
+  font-family: icomoon;
+  src: url("../fonts/icomoon.ttf") format("truetype");
   font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Helvetica Neue Web";
-  src: url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-65-Medium.woff2") format("woff2"),
-       url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-65-Medium.woff") format("woff");
-  font-weight: 500;
   font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Helvetica Neue Web";
-  src: url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-66-Medium-Italic.woff2") format("woff2"),
-       url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-66-Medium-Italic.woff") format("woff");
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Helvetica Neue Web";
-  src: url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-75-Bold.woff2") format("woff2"),
-       url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-75-Bold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Helvetica Neue Web";
-  src: url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-76-Bold-Italic.woff2") format("woff2"),
-       url("https://www.audemarspiguet.com/etc.clientlibs/ap-com/ui/clientlibs/publish/resources/fonts/Neue-Helvetica-76-Bold-Italic.woff") format("woff");
-  font-weight: 700;
-  font-style: italic;
   font-display: swap;
 }
