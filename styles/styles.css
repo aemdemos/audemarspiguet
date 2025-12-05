@@ -19,13 +19,13 @@
   --dark-color: #000;
   --text-color: #fff;
   --link-color: #fff;
-  --link-hover-color: rgba(255, 255, 255, 0.7);
+  --link-hover-color: rgb(255 255 255 / 70%);
 
   /* Audemars Piguet brand colors */
   --ap-black: #000;
   --ap-white: #fff;
-  --ap-dark-bg: rgb(0, 0, 0);
-  --ap-light-bg: rgb(248, 248, 248);
+  --ap-dark-bg: rgb(0 0 0);
+  --ap-light-bg: rgb(248 248 248);
 
   /* fonts */
   --body-font-family: "Helvetica Neue Web", helvetica-neue-fallback, sans-serif;
@@ -49,12 +49,10 @@
   --heading-text-transform: uppercase;
   --heading-font-weight: 100;
   --heading-line-height: 1;
-
   --h3-letter-spacing: -0.22px;
   --h4-letter-spacing: 1.8px;
   --h4-font-weight: 500;
   --h4-line-height: 1.33;
-
   --body-letter-spacing: 0.26px;
   --body-font-weight: 300;
   --body-line-height: 1.44;
@@ -102,7 +100,6 @@
     --body-font-size-m: 16px;
     --body-font-size-s: 14px;
     --body-font-size-xs: 12px;
-
     --heading-font-size-xxl: 48px;
     --heading-font-size-xl: 48px;
     --heading-font-size-l: 22px;
@@ -160,10 +157,12 @@ h6 {
 
 h1 { font-size: var(--heading-font-size-xxl); }
 h2 { font-size: var(--heading-font-size-xl); }
+
 h3 {
   font-size: var(--heading-font-size-l);
   letter-spacing: var(--h3-letter-spacing);
 }
+
 h4 {
   font-size: var(--heading-font-size-m);
   font-weight: var(--h4-font-weight);
