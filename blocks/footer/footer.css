@@ -1,4 +1,3 @@
-
 /* Icon font for footer social media icons */
 @font-face {
   font-family: icomoon;
@@ -106,7 +105,7 @@ footer .footer-content {
   height: auto;
   max-width: 180px;
 }
-/* stylelint-disable no-descending-specificity -- Link specificity organized for maintainability */
+
 .footer-partner-logos a:hover {
   opacity: 0.7;
 }
@@ -135,6 +134,8 @@ a.button:any-link, button {
   max-width: 1200px;
   margin: 0 auto;
   padding: 64px 20px 32px;
+  align-items: center;
+  text-align: center;
 }
 
 .footer-nav-wrapper .footer-language-button {
@@ -167,10 +168,19 @@ a.button:any-link, button {
   font-size: 22px;
 }
 
+  /* Mobile navigation wrapper */
+  .footer-nav-section {
+    border-bottom: 1px solid rgb(255 255 255 / 40%);
+  }
+
 .footer-nav-wrapper .footer-nav-section {
   display: flex;
   flex-direction: column;
 }
+
+  .footer-nav-title {
+    display: none;
+  }
 
 .footer-nav-wrapper .footer-nav-title {
   font-size: 12px;
@@ -191,6 +201,12 @@ a.button:any-link, button {
   gap: 8px;
 }
 
+  .footer-legal {
+    justify-content: center;
+    text-align: center;
+    gap: 8px 20px;
+  }
+
 .footer-bottom .footer-legal {
   display: flex;
   flex-wrap: wrap;
@@ -206,6 +222,28 @@ a.button:any-link, button {
   font-weight: 500;
   transition: color 0.3s ease-in-out;
   white-space: nowrap;
+}
+
+.footer-bottom .footer-social a {
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 300;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+  align-items: center;
+   display: block;
+    width: 21px;
+    height: 21px;
+}
+
+.footer-nav-wrapper .footer-nav-section ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 20px;
+  transition: opacity 0.3s ease;
 }
 
 .footer-bottom .footer-legal a:hover {
@@ -227,32 +265,16 @@ a.button:any-link, button {
   white-space: nowrap;
 }
 
-.footer-nav-wrapper .footer-nav-section ul li a {
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 20px;
-  transition: opacity 0.3s ease;
-}
-
-.footer-bottom .footer-social {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.footer-bottom .footer-social a {
-  color: white;
-  font-size: 14px;
-  text-decoration: none;
-  font-weight: 300;
-  transition: opacity 0.3s ease;
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-}
+ .footer-bottom .footer-social {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    gap: 16px;
+    width: 100%;
+    justify-content: space-between;
+    margin: 0;
+    padding-bottom: 64px;
+    align-items: center;
+  }
 
 .footer-bottom .footer-social .icon {
   font-size: 21px;
@@ -273,12 +295,16 @@ a.button:any-link, button {
   line-height: 1.6;
 }
 
+ .footer-copyright-icp p,
+  .footer-copyright-text p {
+    margin: 0;
+  }
+
 .footer-bottom .footer-copyright p {
   line-height: 1.6;
   color: white;
 }
 
-/* Mobile accordion elements - hidden by default, shown on mobile */
  .footer-nav-content {
     max-height: 0;
     display: block;
@@ -286,11 +312,6 @@ a.button:any-link, button {
     transition: max-height 0.3s ease;
   }
 
-  .footer-nav-title {
-    display: none;
-  }
-
-  /* Partner logos - stack vertically on mobile */
   .footer-nav-toggle {
     display: flex;
     justify-content: space-between;
@@ -341,58 +362,14 @@ a.button:any-link, button {
     padding-bottom: 20px;
   }
 
-  /* Mobile navigation wrapper */
-  .footer-nav-section {
-    border-bottom: 1px solid rgb(255 255 255 / 40%);
-  }
-
-  /* Mobile footer bottom */
-  /* stylelint-disable-next-line no-duplicate-selectors */
-  .footer-bottom {
-    align-items: center;
-    text-align: center;
-  }
-
-  /* Left-align social icons in mobile - matches original ap-socialnetworks */
-  /* stylelint-disable-next-line no-duplicate-selectors */
-  .footer-bottom .footer-social {
-    display: grid;
-    grid-template-columns: repeat(5, auto);
-    gap: 16px;
-    width: 100%;
-    justify-content: space-between;
-    margin: 0;
-    padding-bottom: 64px;
-    align-items: center;
-  }
-  /* stylelint-disable-next-line no-duplicate-selectors */
-  .footer-bottom .footer-social a {
-    display: block;
-    width: 21px;
-    height: 21px;
-  }
-
-  /* Center legal links on mobile */
-  .footer-legal {
-    justify-content: center;
-    text-align: center;
-    gap: 8px 20px;
-  }
-
   /* Center copyright divs on mobile */
   .footer-copyright-icp,
   .footer-copyright-text {
     text-align: center;
   }
 
-  /* Stack copyright divs vertically on mobile */
   .footer-copyright-icp {
     margin-bottom: 16px;
-  }
-
-  .footer-copyright-icp p,
-  .footer-copyright-text p {
-    margin: 0;
   }
 
 /* Tablet layout (767px - 899px) */
@@ -415,7 +392,6 @@ a.button:any-link, button {
     padding: 48px;
   }
 
-  /* Language button spans full width on tablet - appears before nav sections */
   .footer-nav-wrapper .footer-language-button {
     grid-column: 1 / -1;
   }
@@ -547,7 +523,6 @@ a.button:any-link, button {
     order: 2;
   }
 
-  /* Keep copyright divs inline for desktop 900-1439px */
   .footer-copyright-icp,
   .footer-copyright-text {
     display: inline-block;
@@ -580,7 +555,6 @@ a.button:any-link, button {
     max-width: 45%;
   }
 
-  /* Navigation sections grouped on right with consistent spacing */
   .footer-nav-section {
     flex: 1 1 0;
     min-width: 0;
