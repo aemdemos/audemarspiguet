@@ -14,12 +14,12 @@
 
 :root {
   /* colors */
-  --background-color: #000;
+  --background-color: #fff;
   --light-color: #f8f8f8;
   --dark-color: #000;
-  --text-color: #fff;
-  --link-color: #fff;
-  --link-hover-color: rgb(255 255 255 / 70%);
+  --text-color: #000;
+  --link-color: #000;
+  --link-hover-color: rgb(0 0 0 / 70%);
 
   /* Audemars Piguet brand colors */
   --ap-black: #000;
@@ -167,19 +167,27 @@ h6 {
 h1 {
   font-size: var(--heading-font-size-xxl);
   margin-top: 0;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
 }
 
 h2 {
   font-size: var(--heading-font-size-xl);
   margin-top: 48px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   font-family: var(--heading-font-family);
   font-weight: var(--heading-font-weight);
   line-height: var(--heading-line-height);
   letter-spacing: var(--heading-letter-spacing);
   text-transform: var(--heading-text-transform);
   scroll-margin: 40px;
+}
+
+h1 + h2 {
+  margin-top: 24px;
+}
+
+p + h2 {
+  margin-top: 28px;
 }
 
 h3 {
@@ -204,6 +212,14 @@ pre,
 blockquote {
   margin-top: 16px;
   margin-bottom: 16px;
+}
+
+li {
+  margin-bottom: 16px;
+}
+
+li:last-child {
+  margin-bottom: 0;
 }
 
 code,
