@@ -36,10 +36,10 @@
   --body-font-size-s: 14px;
   --body-font-size-xs: 12px;
 
-  /* heading sizes - from extracted Audemars Piguet design */
-  --heading-font-size-xxl: 48px;
-  --heading-font-size-xl: 48px;
-  --heading-font-size-l: 22px;
+  /* heading sizes - mobile base (from extracted Audemars Piguet design) */
+  --heading-font-size-xxl: 40px; /* h1 - mobile */
+  --heading-font-size-xl: 22px; /* h2 - mobile */
+  --heading-font-size-l: 20px;
   --heading-font-size-m: 16px;
   --heading-font-size-s: 14px;
   --heading-font-size-xs: 12px;
@@ -94,18 +94,28 @@
   src: local('Helvetica Neue'), local('Helvetica'), local('Arial');
 }
 
-@media (width >= 900px) {
+/* Tablet breakpoint - 768px */
+@media (width >= 768px) {
   :root {
-    /* responsive adjustments */
-    --body-font-size-m: 16px;
-    --body-font-size-s: 14px;
-    --body-font-size-xs: 12px;
-    --heading-font-size-xxl: 48px;
-    --heading-font-size-xl: 48px;
+    --heading-font-size-xxl: 48px; /* h1 - tablet */
+    --heading-font-size-xl: 28px; /* h2 - tablet */
     --heading-font-size-l: 22px;
-    --heading-font-size-m: 16px;
-    --heading-font-size-s: 14px;
-    --heading-font-size-xs: 12px;
+  }
+}
+
+/* Desktop breakpoint - 1025px */
+@media (width >= 1025px) {
+  :root {
+    --heading-font-size-xxl: 56px; /* h1 - desktop */
+    --heading-font-size-xl: 30px; /* h2 - desktop */
+    --heading-font-size-l: 24px;
+  }
+}
+
+/* Large desktop breakpoint - 1440px */
+@media (width >= 1440px) {
+  :root {
+    /* large desktop adjustments - can be expanded as needed */
   }
 }
 
@@ -140,13 +150,12 @@ footer .footer[data-block-status="loaded"] {
 }
 
 h1,
-h2,
 h3,
 h4,
 h5,
 h6 {
-  margin-top: 0.67em;
-  margin-bottom: 0.67em;
+  margin-top: 48px;
+  margin-bottom: 24px;
   font-family: var(--heading-font-family);
   font-weight: var(--heading-font-weight);
   line-height: var(--heading-line-height);
@@ -155,8 +164,23 @@ h6 {
   scroll-margin: 40px;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
+h1 {
+  font-size: var(--heading-font-size-xxl);
+  margin-top: 0;
+  margin-bottom: 48px;
+}
+
+h2 {
+  font-size: var(--heading-font-size-xl);
+  margin-top: 48px;
+  margin-bottom: 16px;
+  font-family: var(--heading-font-family);
+  font-weight: var(--heading-font-weight);
+  line-height: var(--heading-line-height);
+  letter-spacing: var(--heading-letter-spacing);
+  text-transform: var(--heading-text-transform);
+  scroll-margin: 40px;
+}
 
 h3 {
   font-size: var(--heading-font-size-l);
@@ -178,8 +202,8 @@ ol,
 ul,
 pre,
 blockquote {
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 code,
@@ -295,18 +319,18 @@ main > .section {
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: 100%;
   margin: auto;
-  padding: 0 24px;
+  padding: 0 32px;
 }
 
 main > .section:first-of-type {
   margin-top: 0;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   main > .section > div {
-    padding: 0 32px;
+    padding: 0 93px;
   }
 }
 
