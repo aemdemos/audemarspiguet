@@ -379,7 +379,7 @@ a.button:any-link, button {
   }
 
 /* Tablet layout (767px - 899px) */
-@media (width > 767px) {
+@media (width >= 768px) {
   .footer-partner-section {
     padding: 60px 24px 50px;
   }
@@ -476,7 +476,7 @@ a.button:any-link, button {
     }
 }
 
-@media (width >= 1025px) {
+@media (width >= 1024px) {
   .footer-partner-section {
     padding: 56px 24px;
   }
@@ -558,8 +558,8 @@ a.button:any-link, button {
 
   /* Language button on left with fixed width */
   .footer-nav-wrapper .footer-language-button {
-     flex: 0 0 45%;
-    max-width: 45%;
+    flex: 0 0 48%;
+    max-width: 48%;
   }
 
   .footer-nav-section {

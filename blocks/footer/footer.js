@@ -1,18 +1,23 @@
+import { getMetadata } from '../../scripts/aem.js';
+import { loadFragment } from '../fragment/fragment.js';
+
 /**
  * loads and decorates the footer
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
   try {
-    const footerPath = block.textContent.trim() || '/footer';
-    const resp = await fetch(`${footerPath}.plain.html`);
-    if (!resp.ok) {
+    const fallbackPath = block.textContent.trim() || '/footer';
+    const footerMeta = getMetadata('footer');
+    const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : fallbackPath;
+    const fragment = await loadFragment(footerPath);
+    if (!fragment) {
       return;
     }
-    const html = await resp.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    const sections = Array.from(doc.body.children).filter((el) => el.tagName === 'DIV');
+
+    const wrapper = document.createElement('div');
+    wrapper.append(...fragment.childNodes);
+    const sections = Array.from(wrapper.children).filter((el) => el.tagName === 'DIV');
     if (sections.length < 2) {
       return;
     }
@@ -171,6 +176,10 @@ export default async function decorate(block) {
           const newLink = link.cloneNode(true);
           newLink.target = '_blank';
           newLink.rel = 'noopener noreferrer';
+          const inlineImg = newLink.querySelector('img');
+          if (inlineImg) {
+            inlineImg.remove();
+          }
           const iconClasses = Array.from(iconSpan.classList);
           const iconClass = iconClasses.find((c) => c.startsWith('icon-'));
           if (iconClass) {
