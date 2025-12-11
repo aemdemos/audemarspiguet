@@ -1,33 +1,19 @@
 /* Accordion FAQ - Audemars Piguet Style */
 
 main .section.accordion-faq-container {
-  padding-top: 100px;
   padding-bottom: 100px;
 }
 
-@media only screen and (min-width: 1025px) {
-  main .section.accordion-faq-container {
-    padding-bottom: 120px;
+/* Mobile responsiveness */
+  .accordion-faq-container h2 {
+    font-size: 24px;
+    line-height: 24px;
   }
-}
-
-/* Section Title (H2) Styling */
-.accordion-faq-container h2 {
-  font-family: "Helvetica Neue Web", sans-serif;
-  font-size: 28px;
-  font-weight: 100;
-  line-height: 28px;
-  color: var(--text-color);
-  margin: 23.24px 0;
-  padding: 0 0 6px;
-  text-transform: uppercase;
-  letter-spacing: -0.3px;
-}
 
 /* Accordion Item Container */
 .accordion-faq details {
   border: none;
-  border-bottom: 1px solid rgb(139, 140, 140);
+  border-bottom: 1px solid #8b8c8c;
   margin: 0;
   padding: 0;
   background-color: transparent;
@@ -43,8 +29,6 @@ main .section.accordion-faq-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 24px;
-  padding: 24px 0;
   cursor: pointer;
   list-style: none;
   font-family: "Helvetica Neue Web", sans-serif;
@@ -82,7 +66,6 @@ main .section.accordion-faq-container {
   background-image: url('/icons/minus.svg');
 }
 
-/* Answer/Content Styling */
 .accordion-faq details .accordion-item-body {
   padding: 0;
   padding-top: 0;
@@ -113,24 +96,6 @@ main .section.accordion-faq-container {
   font-weight: 300;
 }
 
-.accordion-faq details .accordion-item-body a:hover {
-  opacity: 1;
-  color: var(--text-color);
-}
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .accordion-faq-container h2 {
-    font-size: 24px;
-    line-height: 24px;
-  }
 
-  .accordion-faq details summary {
-    gap: 16px;
-    padding: 20px 0;
-  }
 
-  .accordion-faq details .accordion-item-body {
-    padding-bottom: 20px;
-  }
-}
