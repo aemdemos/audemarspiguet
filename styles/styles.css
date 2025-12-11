@@ -125,6 +125,11 @@ body.appear {
   display: block;
 }
 
+body.light {
+  --background-color: #fff;
+  --text-color: #000;
+}
+
 header {
   height: var(--nav-height);
 }

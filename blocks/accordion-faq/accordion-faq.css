@@ -1,70 +1,109 @@
 /* Accordion FAQ - Audemars Piguet Style */
 
 main .section.accordion-faq-container {
-  padding-bottom: 120px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
+@media only screen and (min-width: 1025px) {
+  main .section.accordion-faq-container {
+    padding-bottom: 120px;
+  }
+}
+
+/* Section Title (H2) Styling */
 .accordion-faq-container h2 {
-  font-size: 24px;
-  font-weight: 300;
-  margin-top: 24px;
-  margin-bottom: 24px;
+  font-family: "Helvetica Neue Web", sans-serif;
+  font-size: 28px;
+  font-weight: 100;
+  line-height: 28px;
+  color: var(--text-color);
+  margin: 23.24px 0;
+  padding: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: -0.3px;
 }
 
+/* Accordion Item Container */
 .accordion-faq details {
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid rgb(139, 140, 140);
   margin: 0;
-  margin-bottom: 24px;
   padding: 0;
+  background-color: transparent;
 }
 
 .accordion-faq details:last-child {
   margin-bottom: 0;
 }
 
-.accordion-faq details p {
-  margin-top: 0.8em;
-  margin-bottom: 0.8em;
-}
-
+/* Question/Summary Styling */
 .accordion-faq details summary {
   position: relative;
-  padding: 0;
-  padding-right: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0;
   cursor: pointer;
   list-style: none;
+  font-family: "Helvetica Neue Web", sans-serif;
   font-size: 16px;
   font-weight: 300;
-  letter-spacing: 0.21px;
-  line-height: 1.5;
-  text-transform: none;
+  line-height: 24px;
+  color: var(--text-color);
+  text-align: left;
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  transition: padding 0.2s ease-in-out;
 }
 
 .accordion-faq details summary::-webkit-details-marker {
   display: none;
 }
 
-/* Plus/minus icon */
+/* Plus/Minus Icon */
 .accordion-faq details summary::after {
-  content: '+';
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 20px;
-  font-weight: 100;
-  line-height: 1.2;
-  transition: transform 0.3s ease;
+  content: '';
+  position: relative;
+  display: grid;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  background-image: url('/icons/plus.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px 16px;
+  transition: all 0.3s ease;
 }
 
 .accordion-faq details[open] summary::after {
-  content: '−';
+  background-image: url('/icons/minus.svg');
 }
 
+/* Answer/Content Styling */
 .accordion-faq details .accordion-item-body {
   padding: 0;
-  padding-top: 16px;
-  color: inherit;
+  padding-top: 0;
+  padding-bottom: 24px;
+  margin: 0;
+  font-family: "Helvetica Neue Web", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-color);
+  opacity: 0.7;
+  background-color: transparent;
+}
+
+/* Paragraph spacing within answers */
+.accordion-faq details .accordion-item-body p {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.accordion-faq details .accordion-item-body p:last-child {
+  margin-bottom: 0;
 }
 
 /* Links within accordion content */
@@ -75,5 +114,23 @@ main .section.accordion-faq-container {
 }
 
 .accordion-faq details .accordion-item-body a:hover {
-  color: var(--link-hover-color);
+  opacity: 1;
+  color: var(--text-color);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .accordion-faq-container h2 {
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  .accordion-faq details summary {
+    gap: 16px;
+    padding: 20px 0;
+  }
+
+  .accordion-faq details .accordion-item-body {
+    padding-bottom: 20px;
+  }
 }
