@@ -14,7 +14,7 @@
 
 :root {
   /* colors */
-  --background-color: #fff;
+  --background-color: #000;
   --light-color: #f8f8f8;
   --dark-color: #000;
   --text-color: #000;
@@ -369,4 +369,8 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+main .section.white-bg {
+  --background-color: #fff;
 }

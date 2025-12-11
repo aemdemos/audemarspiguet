@@ -1,5 +1,5 @@
 .*
-*.md
+# *.md
 karma.config.js
 LICENSE
 package.json
