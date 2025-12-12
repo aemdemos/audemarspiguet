@@ -371,7 +371,7 @@ main .section.highlight {
   padding: 40px 0;
 }
 
-main .section.white-bg {
+main.white-bg {
   --background-color: #fff;
   --text-color: #000;
   --link-color: #000;
