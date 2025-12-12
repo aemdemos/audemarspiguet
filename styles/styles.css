@@ -17,9 +17,9 @@
   --background-color: #000;
   --light-color: #f8f8f8;
   --dark-color: #000;
-  --text-color: #000;
-  --link-color: #000;
-  --link-hover-color: rgb(0 0 0 / 70%);
+  --text-color: #fff;
+  --link-color: #fff;
+  --link-hover-color: rgb(255 255 255 / 70%);
 
   /* Audemars Piguet brand colors */
   --ap-black: #000;
@@ -373,4 +373,7 @@ main .section.highlight {
 
 main .section.white-bg {
   --background-color: #fff;
+  --text-color: #000;
+  --link-color: #000;
+  --link-hover-color: rgb(0 0 0 / 70%);
 }
