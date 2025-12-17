@@ -18,6 +18,11 @@
     padding: 0;
   }
 }
+/* Hide nav-tools text only in desktop (min-width: 1024px) */
+header nav[aria-expanded="false"] .nav-tools .nav-tools-text {
+  display: none;
+}
+
 /* Mobile (< 768px): Hide submenus by default, show only when expanded */
 @media (max-width: 767px) {
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
@@ -498,12 +503,7 @@ header nav .nav-150years img {
     font-size: 24px;
     color: inherit;
   }
-  /* Hide nav-tools text on tablet, show only icons */
-  header nav .nav-tools a .icon + span,
-  header nav .nav-tools a .icon + strong,
-  header nav .nav-tools a .icon + em {
-    display: none ;
-  }
+
 /* Remove background, border, and padding from all ancestors of icon-location up to nav-tools */
 header nav .nav-tools,
 header nav .nav-tools > *,
@@ -547,8 +547,8 @@ header nav .nav-tools .icon-location {
   header nav .nav-tools a .icon {
     color: inherit;
     font-size: 24px;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     display: inline-block;
   }
 }
@@ -846,7 +846,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > p:has(em) em {
     width: 100%;
     height: calc(100% - 120px);
     background: #fff;
-    z-index: 1000;
+    z-index: 2001;
     overflow-y: auto;
     transform: translateX(100%);
     transition: transform 0.3s ease;
@@ -879,8 +879,8 @@ header nav .nav-sections .default-content-wrapper > ul > li > p:has(em) em {
     transition: opacity 0.2s ease;
     position: absolute;
     left: 24px;
-    height: 24px;
-    line-height: 24px;
+    height: 32px;
+    line-height: 32px;
     display: flex;
     align-items: center;
   }
@@ -1376,4 +1376,3 @@ header nav .nav-tools .icon img {
     margin-right: 0.5rem;
   }
 }
-

@@ -111,6 +111,15 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
       "aria-label",
       expanded ? "Open navigation" : "Close navigation"
     );
+    // When closing the menu, also remove any open mobile submenu panels
+    if (expanded && window.innerWidth < 768) {
+      document
+        .querySelectorAll(".mobile-submenu-panel")
+        .forEach((panel) => panel.remove());
+      // Also show nav-tools again
+      const navTools = nav.querySelector(".nav-tools");
+      if (navTools) navTools.classList.remove("nav-tools-hidden");
+    }
   }
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections ? navSections.querySelectorAll(".nav-drop") : [];
@@ -302,7 +311,8 @@ export default async function decorate(block) {
             "aria-label",
             `View ${h3.textContent} submenu`
           );
-          expandButton.innerHTML = ">";
+          // Use a right chevron SVG for a modern next button look
+          expandButton.innerHTML = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><path d="M7 5L12 10L7 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
           li.append(expandButton);
         }
 
@@ -349,7 +359,23 @@ export default async function decorate(block) {
             currentEl.querySelector("a") &&
             currentEl.querySelector(".icon")
           ) {
-            toolsDiv.append(currentEl.cloneNode(true));
+            // Clone and wrap plain text in nav-tools links
+            const toolPara = currentEl.cloneNode(true);
+            toolPara.querySelectorAll("a").forEach((a) => {
+              // For each child node of the link
+              Array.from(a.childNodes).forEach((node) => {
+                if (
+                  node.nodeType === Node.TEXT_NODE &&
+                  node.textContent.trim().length > 0
+                ) {
+                  const span = document.createElement("span");
+                  span.className = "nav-tools-text";
+                  span.textContent = node.textContent;
+                  a.replaceChild(span, node);
+                }
+              });
+            });
+            toolsDiv.append(toolPara);
           }
           currentEl = currentEl.nextElementSibling;
         }
@@ -507,6 +533,16 @@ export default async function decorate(block) {
         }
 
         navSection.addEventListener("click", (e) => {
+          const nav = document.getElementById("nav");
+          const navTools = nav ? nav.querySelector(".nav-tools") : null;
+          // Only hide nav-tools if this li has a submenu (nav-drop) and is mobile
+          if (
+            window.innerWidth < 768 &&
+            navTools &&
+            navSection.classList.contains("nav-drop")
+          ) {
+            navTools.classList.add("nav-tools-hidden");
+          }
           if (isDesktop.matches) {
             // If this is a simple link without submenu, navigate to it
             const hasSubmenu = navSection.classList.contains("nav-drop");
@@ -614,10 +650,10 @@ function showMobileSubmenuPanel(navSection, navSections) {
 
   if (!submenu) return;
 
-  // Check if panel already exists, if so remove it
+  // Prevent opening multiple panels: if a panel exists, do nothing
   let panel = navSections.querySelector(".mobile-submenu-panel");
   if (panel) {
-    panel.remove();
+    return;
   }
 
   // Create the submenu panel
@@ -641,6 +677,12 @@ function showMobileSubmenuPanel(navSection, navSections) {
       panel.remove();
       // Reset aria-expanded for the menu item but keep main menu open
       navSection.setAttribute("aria-expanded", "false");
+      // Show nav-tools again when going back from submenu (mobile only)
+      const nav = document.getElementById("nav");
+      const navTools = nav ? nav.querySelector(".nav-tools") : null;
+      if (window.innerWidth < 768 && navTools) {
+        navTools.classList.remove("nav-tools-hidden");
+      }
     }, 300);
   });
 
@@ -670,6 +712,12 @@ function showMobileSubmenuPanel(navSection, navSections) {
   setTimeout(() => {
     panel.classList.add("slide-in");
   }, 10);
+  // Hide nav-tools when submenu panel is shown (mobile only)
+  const nav = document.getElementById("nav");
+  const navTools = nav ? nav.querySelector(".nav-tools") : null;
+  if (window.innerWidth < 768 && navTools) {
+    navTools.classList.add("nav-tools-hidden");
+  }
 }
 
 function moveNavToolsForMobileMenu(nav) {
@@ -705,6 +753,11 @@ function closeMobileMenu(nav) {
   document
     .querySelectorAll(".mobile-submenu-panel")
     .forEach((panel) => panel.remove());
+  // Show nav-tools again when menu is closed
+  const navTools = nav.querySelector(".nav-tools");
+  if (navTools) {
+    navTools.classList.remove("nav-tools-hidden");
+  }
 }
 
 document.addEventListener("click", function (e) {
@@ -735,4 +788,3 @@ if (nav) {
     attributeFilter: ["aria-expanded"],
   });
 }
-
