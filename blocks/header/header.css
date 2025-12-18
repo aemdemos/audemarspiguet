@@ -25,6 +25,11 @@ header nav[aria-expanded="false"] .nav-tools .nav-tools-text {
 
 /* Mobile (< 768px): Hide submenus by default, show only when expanded */
 @media (max-width: 767px) {
+  /* Adjust nav height for mobile */
+  header nav {
+    height: 80px;
+  }
+  
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
   margin-left: 0;
   margin-bottom: 12px;
@@ -40,9 +45,7 @@ header nav[aria-expanded="false"] .nav-tools .nav-tools-text {
   header nav .nav-sections .default-content-wrapper > ul > li > .menu-expand-btn {
   display: block;
   }
-  header nav[aria-expanded="true"] .nav-150years {
-  display: none;
-  }
+  
   header nav .nav-tools a {
   font-size: 0;
   color: transparent;
@@ -66,8 +69,7 @@ header nav[aria-expanded="false"] .nav-tools .nav-tools-text {
     header nav[aria-expanded="true"] .nav-brand img,
     header nav[aria-expanded="true"] .nav-150years img {
       filter: none;
-      transition: filter 0.2s ease;
-      top: 60px;
+      transition: filter 0.3s ease;
     }
     header nav[aria-expanded="true"] .nav-brand,
     header nav[aria-expanded="true"] .nav-brand *,
@@ -79,7 +81,7 @@ header nav[aria-expanded="false"] .nav-tools .nav-tools-text {
       fill: #000;
       stroke: #000;
       filter: none;
-      transition: color 0.2s, fill 0.2s, stroke 0.2s, filter 0.2s;
+      transition: color 0.3s, fill 0.3s, stroke 0.3s, filter 0.3s;
     }
     header nav[aria-expanded="true"] .nav-sections .default-content-wrapper > ul > li > a,
     header nav[aria-expanded="true"] .nav-sections .default-content-wrapper > ul > li > ul > li > a {
@@ -89,35 +91,27 @@ header nav[aria-expanded="false"] .nav-tools .nav-tools-text {
     header nav[aria-expanded="true"] .nav-tools .icon img {
       filter: none;
     }
-    /* Fix .nav-topbar at top for mobile */
-    header nav[aria-expanded="true"] .nav-topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 10001;
-      background: #fff;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 2rem;
-      padding: 1rem 1.5rem 0.5rem 1.5rem;
-      border-bottom: 1px solid #eee;
-      width: 100%;
-      height: 64px;
+    /* Separator turns black when menu is open */
+    header nav[aria-expanded="true"] .nav-hamburger-separator {
+      background-color: rgba(0, 0, 0, 0.15);
     }
 }
 /* Tablet styles: 768px - 1023px */
 @media (min-width: 768px) and (max-width: 1023px) {
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
-  display: block;
+    display: block;
   }
   header nav .nav-sections .default-content-wrapper > ul > li > .menu-expand-btn {
-  display: none;
+    display: none;
   }
   header nav .nav-150years {
-  left: 32px;
+    left: 24px;
+  }
+  header nav .nav-hamburger {
+    left: 80px;
+  }
+  header nav .nav-hamburger-separator {
+    left: 68px;
   }
 }
 /* Large desktop styles: 1440px and up */
@@ -136,20 +130,30 @@ header nav[aria-expanded="false"] .nav-tools .nav-tools-text {
   }
   header nav .nav-150years {
   position: absolute;
-  left: 47px;
+  left: 32px;
   display: flex;
   align-items: center;
   gap: 16px;
   z-index: 1003;
+  top: 50%;
+  transform: translateY(-50%);
   }
   header nav .nav-150years img {
-  height: 37.89px;
+  height: 32px;
   width: auto;
-  transition: filter 0.2s ease;
-  filter: brightness(0) invert(1) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+  transition: filter 0.3s ease;
+  filter: brightness(0) invert(1);
+  opacity: 1;
   }
   header nav .nav-hamburger {
-  display: none ;
+  display: none;
+  }
+  /* Keep separator visible on desktop - 40px from logo */
+  header nav .nav-hamburger-separator {
+  display: block;
+  left: 104px;
+  height: 28px;
+  background-color: rgba(255, 255, 255, 0.3);
   }
   header nav .nav-sections {
   display: flex;
@@ -164,6 +168,7 @@ header nav[aria-expanded="false"] .nav-tools .nav-tools-text {
   max-width: none;
   transform: none;
   z-index: 1002;
+  margin-left: 125px;
   }
   header nav .nav-sections .default-content-wrapper {
   display: flex;
@@ -245,6 +250,67 @@ header nav[aria-expanded="false"] .nav-tools .nav-tools-text {
     display: none ;
   }
 }
+
+/* Hamburger Menu - visible on mobile and tablet (< 1440px) */
+header nav .nav-hamburger {
+  display: flex;
+  align-items: center;
+  order: 0;
+  z-index: 1001;
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 80px;
+}
+
+/* Keep hamburger in same position when menu is open (after separator) */
+header nav[aria-expanded="true"] .nav-hamburger {
+  left: 70px;
+  top: 50px;
+}
+
+/* Hamburger separator - vertical bar between 150 years logo and hamburger */
+header nav .nav-hamburger-separator {
+  display: block;
+  position: absolute;
+  left: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.3);
+  z-index: 1001;
+  margin-left: 40px;
+}
+
+/* Separator turns black when menu is open */
+header nav[aria-expanded="true"] .nav-hamburger-separator {
+  display: none;
+}
+
+@media (min-width: 768px) and (max-width: 1439px) {
+  header nav .nav-hamburger {
+    left: 80px;
+    top: 50%;
+  }
+  
+  header nav[aria-expanded="true"] .nav-hamburger {
+    left: 80px;
+    top: 50%;
+  }
+  
+  header nav .nav-hamburger-separator {
+    left: 68px;
+    height: 24px;
+  }
+
+  header nav[aria-expanded="true"] .nav-hamburger-separator {
+    display: unset;
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+}
+
 @media (min-width: 768px) and (max-width: 1439px) {
   /* Two-column nav layout */
   header nav[aria-expanded="true"] .nav-sections .default-content-wrapper > ul {
@@ -372,7 +438,7 @@ header nav .nav-150years img {
             header nav:has(.nav-sections .default-content-wrapper > ul > li[aria-expanded='true']) .nav-150years img,
             header nav:has(.nav-sections .default-content-wrapper > ul > li[aria-expanded='true']) .nav-brand img {
               filter: none;
-              transition: filter 0.2s ease;
+              transition: filter 0.3s ease;
             }
           /* Change menu item font color to black when dropdown is open */
           header nav:has(.nav-sections .default-content-wrapper > ul > li[aria-expanded='true']) .nav-sections .default-content-wrapper > ul > li > a {
@@ -480,12 +546,6 @@ header nav .nav-150years img {
     height: 38.87px;
     width: auto;
     filter: brightness(0) invert(1) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
-  }
-  header nav .nav-hamburger {
-    position: absolute;
-    left: 94px;
-    top: 60px;
-    z-index: 1001;
   }
   header nav .nav-tools {
     margin-left: auto;
@@ -643,20 +703,43 @@ header .nav-brand img {
   transform: translateX(-50%);
 }
 
-/* Hide extra brand content */
-header .nav-brand h3,
-header .nav-brand ul,
-header .nav-brand p:has(em) {
-  display: none ;
+/* Logo visibility based on screen width */
+/* Mobile: show only AP logo (mob) */
+@media (max-width: 767px) {
+  header .nav-brand img[src*="logo-desk"],
+  header .nav-brand img.logo-desktop {
+    display: none;
+  }
+  header .nav-brand img[src*="logo-mob"],
+  header .nav-brand img.logo-mobile {
+    display: block;
+  }
 }
 
-/* Hamburger Menu */
-header nav .nav-hamburger {
-  display: flex;
-  align-items: center;
-  order: 0;
-  z-index: 1001;
+/* Tablet and Desktop: show full Audemars Piguet logo (desk) */
+@media (min-width: 768px) {
+  header .nav-brand img[src*="logo-mob"],
+  header .nav-brand img.logo-mobile {
+    display: none;
+  }
+  header .nav-brand img[src*="logo-desk"],
+  header .nav-brand img.logo-desktop {
+    display: block;
+  }
 }
+
+/* Hide extra brand content */
+header .nav-brand h3,
+header .nav-brand ul {
+  display: none;
+}
+
+/* Only hide paragraphs with emphasis that don't have logos */
+header .nav-brand p:has(em):not(:has(img)):not(:has(.icon)) {
+  display: none;
+}
+
+
 
 header nav .nav-hamburger button {
   background: none;
@@ -673,8 +756,9 @@ header nav .nav-hamburger button {
   white-space: initial;
 }
 
-header nav .nav-hamburger-icon,
-header nav .nav-hamburger-icon::before {
+/* Hamburger icon - 2 lines by default */
+header nav .nav-hamburger-icon::before,
+header nav .nav-hamburger-icon::after {
   display: block;
   width: 30px;
   height: 2px;
@@ -682,75 +766,42 @@ header nav .nav-hamburger-icon::before {
   transition: all 0.3s ease;
   box-sizing: border-box;
   border-radius: 1px;
-  filter: none;
-}
-header nav .nav-hamburger-icon {
-  position: relative;
-}
-header nav .nav-hamburger-icon::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 8px;
-}
-/* Remove the third line (after) */
-header nav .nav-hamburger-icon::after {
-  display: none;
-}
-
-header nav .nav-hamburger-icon {
-  position: relative;
-}
-
-header nav .nav-hamburger-icon::before,
-header nav .nav-hamburger-icon::after {
   content: '';
   position: absolute;
   left: 0;
 }
 
-header nav .nav-hamburger-icon::before {
-  top: -8px;
-}
-
-header nav .nav-hamburger-icon::after {
-  top: 8px;
-}
-
-  header nav[aria-expanded="true"] .nav-hamburger-icon {
-    background-color: transparent;
-  }
-  header nav[aria-expanded="true"] .nav-hamburger-icon::before {
-    background-color: #000;
-    transform: rotate(45deg);
-    top: 0;
-    left: 0;
-    width: 30px;
-    height: 2px;
-    display: block;
-    content: '';
-    position: absolute;
-    border-radius: 1px;
-  }
-  header nav[aria-expanded="true"] .nav-hamburger-icon::after {
-    background-color: #000;
-    transform: rotate(-45deg);
-    top: 0;
-    left: 0;
-    width: 30px;
-    height: 2px;
-    display: block;
-    content: '';
-    position: absolute;
-    border-radius: 1px ;
-  }
-
-header nav[aria-expanded="true"] .nav-hamburger-icon::after {
-  transform: rotate(-45deg);
-  top: 0;
-  left: 0;
+header nav .nav-hamburger-icon {
+  position: relative;
+  display: block;
   width: 30px;
   height: 2px;
+  background-color: transparent;
+}
+
+header nav .nav-hamburger-icon::before {
+  top: -4px;
+}
+
+header nav .nav-hamburger-icon::after {
+  top: 4px;
+}
+
+/* When menu is open, transform into X (black) */
+header nav[aria-expanded="true"] .nav-hamburger-icon {
+  background-color: transparent;
+}
+
+header nav[aria-expanded="true"] .nav-hamburger-icon::before {
+  background-color: #000;
+  transform: rotate(45deg);
+  top: 0;
+}
+
+header nav[aria-expanded="true"] .nav-hamburger-icon::after {
+  background-color: #000;
+  transform: rotate(-45deg);
+  top: 0;
 }
 
 /* Nav Sections (Menu) */
@@ -1055,25 +1106,59 @@ header nav .nav-150years {
   display: flex;
   align-items: center;
   position: absolute;
-  left: 37px;
-  top: 0;
-  height: 100%;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: auto;
   z-index: 1003;
   background: none;
+  order: -1;
 }
+
 header nav .nav-150years a {
   display: flex;
   align-items: center;
-  height: 44px;
+  height: auto;
 }
+
+header nav .nav-150years a.button {
+  overflow: unset ;
+}
+
 header nav .nav-150years img {
-  height: 32px;
+  height: 24px;
   width: auto;
-  filter: brightness(0) invert(1) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+  opacity: 1;
 }
+
 @media (min-width: 768px) {
+  header nav .nav-150years {
+    left: 24px;
+  }
+  
   header nav .nav-150years img {
-    height: 38.87px;
+    height: 28px;
+  }
+}
+
+@media (min-width: 1440px) {
+  header nav .nav-150years {
+    left: 32px;
+  }
+  
+  header nav .nav-150years img {
+    height: 32px;
+  }
+  
+  /* Keep separator visible on desktop - 40px margin from logo, 40px before nav */
+  header nav[aria-expanded="true"] .nav-hamburger-separator {
+    display: block;
+    left: 104px;
+    height: 28px;
+    z-index: 1006;
+    background-color: rgba(0, 0, 0, 0.15);
   }
 }
 
@@ -1087,6 +1172,11 @@ header nav .nav-tools {
   justify-content: flex-end;
   z-index: 1001;
   order: 2;
+}
+
+/* Hidden state for nav-tools */
+header nav .nav-tools.nav-tools-hidden {
+  display: none;
 }
 
 header nav .nav-tools p,
@@ -1138,7 +1228,6 @@ header nav .nav-tools .icon img {
 @media (min-width: 1440px) {
   header nav {
     height: 120px;
-    padding-left: 9.25rem;
     padding-right: 9.25rem;
   }
   header .nav-brand {

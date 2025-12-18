@@ -169,6 +169,25 @@ export default async function decorate(block) {
     if (section) section.classList.add(`nav-${c}`);
   });
 
+  // Process nav-tools regardless of restructuring
+  const navTools = nav.querySelector(".nav-tools");
+  if (navTools) {
+    // Wrap plain text nodes in nav-tools-text spans for proper styling
+    navTools.querySelectorAll("a").forEach((a) => {
+      Array.from(a.childNodes).forEach((node) => {
+        if (
+          node.nodeType === Node.TEXT_NODE &&
+          node.textContent.trim().length > 0
+        ) {
+          const span = document.createElement("span");
+          span.className = "nav-tools-text";
+          span.textContent = node.textContent;
+          a.replaceChild(span, node);
+        }
+      });
+    });
+  }
+
   // Fix structure if nav content is not properly separated or if nav-sections has h3 elements
   const navSections = nav.querySelector(".nav-sections");
   const navBrandCheck = nav.querySelector(".nav-brand");
@@ -201,7 +220,10 @@ export default async function decorate(block) {
       if (firstH3) {
         let currentEl = contentSource.firstElementChild;
         while (currentEl && currentEl !== firstH3) {
-          if (currentEl.tagName === "P" && currentEl.querySelector("img")) {
+          if (
+            currentEl.tagName === "P" &&
+            (currentEl.querySelector("img") || currentEl.querySelector(".icon"))
+          ) {
             logoParagraphs.push(currentEl);
           }
           currentEl = currentEl.nextElementSibling;
@@ -209,21 +231,15 @@ export default async function decorate(block) {
       }
 
       logoParagraphs.forEach((logoPara) => {
-        brandDiv.append(logoPara.cloneNode(true));
+        const clonedPara = logoPara.cloneNode(true);
+        brandDiv.append(clonedPara);
       });
 
       // The 150 years logo uses icon syntax and will be handled by EDS automatically
       // If not present, manually add it
       if (logoParagraphs.length < 2) {
-        const p150 = document.createElement("p");
-        const a150 = document.createElement("a");
-        a150.href = "https://150years.audemarspiguet.com/en";
-        const img150 = document.createElement("img");
-        img150.src = "/icons/150-years-logo.svg";
-        img150.alt = "150 Years";
-        a150.appendChild(img150);
-        p150.appendChild(a150);
-        brandDiv.append(p150);
+        // Add 150 years logo dynamically or via other logic here if needed
+        // (No hardcoded SVG path)
       }
 
       // Move navigation sections (h3 + content) to sections
@@ -476,29 +492,81 @@ export default async function decorate(block) {
       brandLink.className = "";
       brandLink.closest(".button-container").className = "";
     }
+
+    // Ensure logo images are properly set up
+    const paragraphsWithLogos = Array.from(
+      navBrand.querySelectorAll("p")
+    ).filter((p) => p.querySelector("img") || p.querySelector(".icon"));
+
+    if (paragraphsWithLogos.length > 0) {
+      paragraphsWithLogos.forEach((p) => {
+        const img = p.querySelector("img");
+        if (img) {
+          // Add class names to help with responsive behavior based on src
+          if (img.src && img.src.includes("logo-mob")) {
+            img.classList.add("logo-mobile");
+          } else if (img.src && img.src.includes("logo-desk")) {
+            img.classList.add("logo-desktop");
+          }
+        }
+      });
+    }
   }
 
-  // Icons are already decorated by loadFragment, no need to decorate again
+  // Decorate only icons that don't already have images (avoid duplicates)
+  const undecoratedIcons = nav.querySelectorAll("span.icon:not(:has(img))");
+  undecoratedIcons.forEach((span) => {
+    const iconName = Array.from(span.classList).find((c) =>
+      c.startsWith("icon-")
+    );
+    if (iconName) {
+      const img = document.createElement("img");
+      img.dataset.iconName = iconName.substring(5);
+      img.src = `${window.hlx.codeBasePath}/icons/${iconName.substring(5)}.svg`;
+      img.alt = "";
+      img.loading = "lazy";
+      img.width = 16;
+      img.height = 16;
+      span.append(img);
+    }
+  });
 
   // Re-query navSections after potential restructuring
   const finalNavSections = nav.querySelector(".nav-sections");
 
-  // Extract 150 Years logo from brand section
+  // Extract 150 Years logo from brand section (third paragraph)
   const nav150Years = document.createElement("div");
   nav150Years.className = "nav-150years";
 
   const navBrandSection = nav.querySelector(".nav-brand");
   if (navBrandSection) {
-    // Find the 150 years link (second paragraph with image)
+    // Find all paragraphs with links in brand section
     const brandParagraphs = navBrandSection.querySelectorAll("p:has(a)");
-    if (brandParagraphs.length > 1) {
+
+    // Get the third paragraph (index 2) if it exists
+    if (brandParagraphs.length >= 3) {
+      const year150Para = brandParagraphs[2];
+      const year150Link = year150Para.querySelector("a");
+
+      if (year150Link) {
+        // Clone the link and add it to nav150Years div
+        nav150Years.appendChild(year150Link.cloneNode(true));
+        // Remove the third paragraph from brand section
+        year150Para.remove();
+      }
+    } else if (brandParagraphs.length > 1) {
+      // Fallback: use second paragraph if third doesn't exist
       const year150Link = brandParagraphs[1].querySelector("a");
       if (year150Link && year150Link.href.includes("150years")) {
         nav150Years.appendChild(year150Link.cloneNode(true));
-        // Remove from brand section
         brandParagraphs[1].remove();
       }
     }
+  }
+
+  // Insert 150 Years logo as the FIRST child of nav (before everything else)
+  if (nav150Years.children.length > 0) {
+    nav.insertBefore(nav150Years, nav.firstChild);
   }
 
   if (finalNavSections) {
@@ -619,19 +687,36 @@ export default async function decorate(block) {
       <span class="nav-hamburger-icon"></span>
     </button>`;
   hamburger.addEventListener("click", () => toggleMenu(nav, finalNavSections));
-  nav.prepend(hamburger);
+
+  // Add separator bar | after 150 years logo
+  const separator = document.createElement("span");
+  separator.className = "nav-hamburger-separator";
+  separator.textContent = "|";
+
+  // Always insert hamburger and separator after the 150 years logo if it exists
+  const nav150YearsEl = nav.querySelector(".nav-150years");
+  if (nav150YearsEl) {
+    if (nav150YearsEl.nextSibling) {
+      nav.insertBefore(separator, nav150YearsEl.nextSibling);
+      nav.insertBefore(hamburger, separator.nextSibling);
+    } else {
+      nav.appendChild(separator);
+      nav.appendChild(hamburger);
+    }
+  } else {
+    // fallback: insert before nav-brand if 150 years not found
+    const navBrandEl = nav.querySelector(".nav-brand");
+    if (navBrandEl) {
+      nav.insertBefore(separator, navBrandEl);
+      nav.insertBefore(hamburger, navBrandEl);
+    }
+  }
   nav.setAttribute("aria-expanded", "false");
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, finalNavSections, isDesktop.matches);
   isDesktop.addEventListener("change", () =>
     toggleMenu(nav, finalNavSections, isDesktop.matches)
   );
-
-  // Insert 150 Years button after brand
-  const navBrandEl = nav.querySelector(".nav-brand");
-  if (navBrandEl && nav150Years.children.length > 0) {
-    navBrandEl.after(nav150Years);
-  }
 
   const navWrapper = document.createElement("div");
   navWrapper.className = "nav-wrapper";
@@ -667,7 +752,7 @@ function showMobileSubmenuPanel(navSection, navSections) {
   const backBtn = document.createElement("button");
   backBtn.className = "submenu-back-btn";
   backBtn.setAttribute("aria-label", "Back to menu");
-  backBtn.innerHTML = "‹";
+  backBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;"><path d="M13 5L8 10L13 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   backBtn.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
