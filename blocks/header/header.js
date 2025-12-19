@@ -714,9 +714,21 @@ export default async function decorate(block) {
   nav.setAttribute("aria-expanded", "false");
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, finalNavSections, isDesktop.matches);
-  isDesktop.addEventListener("change", () =>
-    toggleMenu(nav, finalNavSections, isDesktop.matches)
-  );
+  isDesktop.addEventListener("change", () => {
+    toggleMenu(nav, finalNavSections, isDesktop.matches);
+
+    // Remove mobile submenu panels when switching to desktop
+    if (isDesktop.matches) {
+      const mobilePanels = document.querySelectorAll(".mobile-submenu-panel");
+      mobilePanels.forEach((panel) => panel.remove());
+
+      // Show nav-tools again if hidden
+      const navTools = nav.querySelector(".nav-tools");
+      if (navTools) {
+        navTools.classList.remove("nav-tools-hidden");
+      }
+    }
+  });
 
   const navWrapper = document.createElement("div");
   navWrapper.className = "nav-wrapper";
@@ -735,9 +747,11 @@ function showMobileSubmenuPanel(navSection, navSections) {
 
   if (!submenu) return;
 
-  // Prevent opening multiple panels: if a panel exists, do nothing
-  let panel = navSections.querySelector(".mobile-submenu-panel");
+  // Prevent opening multiple panels: check in the parent element where panels are inserted
+  const parentElement = navSections.parentElement;
+  let panel = parentElement.querySelector(".mobile-submenu-panel");
   if (panel) {
+    // Panel already exists, don't create another one
     return;
   }
 

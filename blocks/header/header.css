@@ -266,8 +266,10 @@ header nav .nav-hamburger {
 
 /* Keep hamburger in same position when menu is open (after separator) */
 header nav[aria-expanded="true"] .nav-hamburger {
-  left: 70px;
   top: 50px;
+  left: 0;
+  padding-left: 20px;
+  margin-left: 0;
 }
 
 /* Hamburger separator - vertical bar between 150 years logo and hamburger */
@@ -744,7 +746,6 @@ header .nav-brand p:has(em):not(:has(img)):not(:has(.icon)) {
 header nav .nav-hamburger button {
   background: none;
   border: none;
-  padding: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -754,6 +755,7 @@ header nav .nav-hamburger button {
   overflow: initial;
   text-overflow: initial;
   white-space: initial;
+  transition: padding 0.3s ease;
 }
 
 /* Hamburger icon - 2 lines by default */
